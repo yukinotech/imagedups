@@ -1,41 +1,47 @@
-# imagedups
-查找/删除相同的图片文件，图片查重，图片去重
+## 建议使用虚拟环境安装依赖
 
-## 开发背景
+操作步骤：
 
-在进行图片分类的机器学习时，收集整理数据是一个必不可少的步骤。但是在使用fdupes进行文件去重时，发现很多看起来一样的图片，实际上二进制文件是不一样的。所以开发一个小程序，根据imagehash，计算图片的average_hash是否一致。如果一致，则认为文件是相同的。 
+1. 安装 virtualenv
 
-## 安装 
-python setup.py install
+```
+pip install virtualenv
+```
 
-## 使用方法
+2. 在项目根目录下执行 virtualenv，指定 python 版本
 
-1. 仅显示重复的图片:
+```
+virtualenv -p python3.10 venv-env
+```
 
-   ```shell
-   imagedups -p /path/to/image/folder1  
-   ```
+其中 venv-env 就是目录名称，可以自定义
 
-   [+]开头的文件是保留的文件；
+3. 激活虚拟环境
 
-   [-]开头的文件是可以清理的文件。
+linux/macOS
 
-2. 递归查找文件：
+```
+source ./venv-env/bin/activate
+```
 
-   ```shell
-   imagedups -r -p /path/to/image/folder
-   ```
+source 和 bash 都是 linux 执行 sh 的命令
 
-3. 查找并删除文件:
+windows
 
-   ```shell
-   imagedups -r -d -p /path/to/image/folder
-   ```
+```
+./venv-env/bin/activate.ps1
+```
 
-4. 删除文件是不进行确认:
+终端激活虚拟环境后，执行的 pip 命令安装的包都会在项目目录中，保证项目隔离
 
-   ```shell
-   imagedups -r -d -N -p /path/to/image/folder
-   ```
+## 项目预期覆盖的需求点
 
-   请做好数据备份
+基础能力：
+
+1. 综合多个指标，比较 2 个图片的相似度
+
+应用能力：
+
+1. 同一目录下的图片去重
+2. 递归同一目录下的所有子目录图片去重
+3. 比较两个目录（非递归）里图片重复的个数
